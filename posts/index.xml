@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Posts on ZHYX&#39;s Blog</title>
-		<link>http://localhost:1313/posts/</link>
+		<link>https://zhyx3423.github.io/posts/</link>
 		<description>Recent content in Posts on ZHYX&#39;s Blog</description>
 		<generator>Hugo</generator>
 		<language>en-us</language>
@@ -12,19 +12,19 @@
 		
 			<lastBuildDate>Tue, 14 Jul 2026 10:00:00 +0800</lastBuildDate>
 		
-			<atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://zhyx3423.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
 			<item>
-				<title>Hello Hugo</title>
-				<link>http://localhost:1313/posts/hello-hugo/</link>
+				<title>树莓派 GPIO 调试 TB6600 步进电机驱动器</title>
+				<link>https://zhyx3423.github.io/posts/raspberry-pi-tb6600/</link>
 				<pubDate>Tue, 14 Jul 2026 10:00:00 +0800</pubDate>
-				<guid>http://localhost:1313/posts/hello-hugo/</guid>
-				<description>&lt;h2 id=&#34;重新开始写博客&#34;&gt;重新开始写博客&lt;/h2&gt;&#xA;&lt;p&gt;今天花了一些时间把 Hugo 站点重新搭起来了。选择 Hugo 的原因很简单——快，真的很快。&lt;/p&gt;&#xA;&lt;p&gt;一个静态站点生成器，用 Go 写成，编译一个中等规模的站点只需要几百毫秒。对比以前用过的某些工具动辄几十秒的构建时间，Hugo 的体验确实让人愉悦。&lt;/p&gt;&#xA;&lt;h3 id=&#34;为什么选-terminal-主题&#34;&gt;为什么选 Terminal 主题&lt;/h3&gt;&#xA;&lt;p&gt;这次用了 Terminal 主题，风格极简，没有多余的装饰。黑底白字，等宽字体，就像在终端里阅读一样。对于以文字为主的个人博客来说，这种设计恰到好处——让读者专注于内容本身。&lt;/p&gt;&#xA;&lt;h3 id=&#34;接下来的计划&#34;&gt;接下来的计划&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;把之前的笔记整理一下搬过来&lt;/li&gt;&#xA;&lt;li&gt;写几篇关于日常开发踩坑的记录&lt;/li&gt;&#xA;&lt;li&gt;也许可以分享一下 Windows 上的一些效率工具&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;总之，又一个开始。希望这次能坚持下去。&lt;/p&gt;</description>
+				<guid>https://zhyx3423.github.io/posts/raspberry-pi-tb6600/</guid>
+				<description>&lt;h2 id=&#34;起因&#34;&gt;起因&lt;/h2&gt;&#xA;&lt;p&gt;大创项目需要精确控制电机转动角度，于是买了一块 TB6600 步进电机驱动器和一颗 42 步进电机。控制器用的是树莓派 4B，通过 GPIO 直接发脉冲。本以为照着淘宝店家的接线图接上就能转，结果折腾了整整一个下午。&lt;/p&gt;&#xA;&lt;h2 id=&#34;tb6600-简介&#34;&gt;TB6600 简介&lt;/h2&gt;&#xA;&lt;p&gt;TB6600 是一款两相步进电机驱动芯片，市面上常见的模块把芯片、光耦隔离、拨码开关都集成在了一块板子上。&lt;/p&gt;&#xA;&lt;h2 id=&#34;踩到的坑&#34;&gt;踩到的坑&lt;/h2&gt;&#xA;&lt;h3 id=&#34;坑1电机不转只有高频啸叫&#34;&gt;坑1：电机不转，只有高频啸叫&lt;/h3&gt;&#xA;&lt;p&gt;脉冲频率太高了。TB6600 最大响应频率约 200kHz，但 42 步进电机在无负载情况下启动频率不能太高。我把 &lt;code&gt;time.sleep&lt;/code&gt; 从 0.0001 改到 0.001，电机才正常转起来。&lt;/p&gt;&#xA;&lt;h3 id=&#34;坑2方向偶尔反转&#34;&gt;坑2：方向偶尔反转&lt;/h3&gt;&#xA;&lt;p&gt;排查了半天，最后发现是杜邦线接触不良。DIR 信号不稳定时，驱动器的方向会出错。焊了根线解决。&lt;/p&gt;&#xA;&lt;h3 id=&#34;坑3使能信号逻辑反了&#34;&gt;坑3：使能信号逻辑反了&lt;/h3&gt;&#xA;&lt;p&gt;一开始以为 ENA- 给高电平是使能，结果电机完全不动。查了 TB6600 手册才发现——ENA- 悬空或高电平时驱动器&lt;strong&gt;脱机&lt;/strong&gt;（电机自由转动），拉低才是使能。跟直觉正好相反。&lt;/p&gt;&#xA;&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;&#xA;&lt;p&gt;整个调试过程下来，最大的感受是：&lt;strong&gt;看手册&lt;/strong&gt;。很多时候觉得是代码的问题，查到最后往往是硬件层面的原因——接线、供电、信号。&lt;/p&gt;&#xA;&lt;p&gt;这次折腾完，对步进电机的控制链路算是有了比较完整的理解。下一步打算用 Python 封装一个简单的控制库。&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>MyFirstBlog</title>
-				<link>http://localhost:1313/posts/myfirstblog/</link>
+				<link>https://zhyx3423.github.io/posts/myfirstblog/</link>
 				<pubDate>Mon, 13 Jul 2026 22:58:37 +0800</pubDate>
-				<guid>http://localhost:1313/posts/myfirstblog/</guid>
+				<guid>https://zhyx3423.github.io/posts/myfirstblog/</guid>
 				<description>&lt;h1 id=&#34;这是一个测试页面&#34;&gt;这是一个测试页面&lt;/h1&gt;</description>
 			</item>
 	</channel>
