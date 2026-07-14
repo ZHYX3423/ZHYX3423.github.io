@@ -2,7 +2,7 @@
 <html lang="en">
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   
-    <title>Posts :: ZHYX&#39;s Blog</title>
+    <title>硬件 :: ZHYX&#39;s Blog</title>
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
 
   <meta name="robots" content="noodp" />
 
-<link rel="canonical" href="http://localhost:1313/posts/" />
+<link rel="canonical" href="http://localhost:1313/tags/%E7%A1%AC%E4%BB%B6/" />
 
 
 
@@ -72,9 +72,9 @@
 
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Posts">
+<meta property="og:title" content="硬件">
 <meta property="og:description" content="" />
-<meta property="og:url" content="http://localhost:1313/posts/" />
+<meta property="og:url" content="http://localhost:1313/tags/%E7%A1%AC%E4%BB%B6/" />
 <meta property="og:site_name" content="ZHYX&#39;s Blog" />
 
   <meta property="og:image" content="http://localhost:1313/og-image.png">
@@ -86,7 +86,7 @@
 
 
 
-  <link href="/posts/index.xml" rel="alternate" type="application/rss+xml" title="ZHYX&#39;s Blog" />
+  <link href="/tags/%E7%A1%AC%E4%BB%B6/index.xml" rel="alternate" type="application/rss+xml" title="ZHYX&#39;s Blog" />
 
 
 
@@ -121,21 +121,26 @@
 
   <div class="content">
     
+  <h1>Posts for: #硬件</h1>
   
   <div class="posts">
     
       <article class="post on-list">
-        <h2 class="post-title">
-          <a href="http://localhost:1313/posts/hello-hugo/">Hello Hugo</a>
-        </h2>
+        <h1 class="post-title">
+          <a href="http://localhost:1313/posts/raspberry-pi-tb6600/">树莓派 GPIO 调试 TB6600 步进电机驱动器</a>
+        </h1>
         <div class="post-meta"><time class="post-date">2026-07-14</time></div>
 
         
           <span class="post-tags">
             
-            #<a href="http://localhost:1313/tags/hugo/">hugo</a>&nbsp;
+            #<a href="http://localhost:1313/tags/raspberry-pi/">raspberry-pi</a>&nbsp;
             
-            #<a href="http://localhost:1313/tags/blog/">blog</a>&nbsp;
+            #<a href="http://localhost:1313/tags/gpio/">gpio</a>&nbsp;
+            
+            #<a href="http://localhost:1313/tags/stepper-motor/">stepper-motor</a>&nbsp;
+            
+            #<a href="http://localhost:1313/tags/%E7%A1%AC%E4%BB%B6/">硬件</a>&nbsp;
             
           </span>
         
@@ -145,48 +150,30 @@
 
         <div class="post-content">
           
-            <h2 id="重新开始写博客">重新开始写博客</h2>
-<p>今天花了一些时间把 Hugo 站点重新搭起来了。选择 Hugo 的原因很简单——快，真的很快。</p>
-<p>一个静态站点生成器，用 Go 写成，编译一个中等规模的站点只需要几百毫秒。对比以前用过的某些工具动辄几十秒的构建时间，Hugo 的体验确实让人愉悦。</p>
-<h3 id="为什么选-terminal-主题">为什么选 Terminal 主题</h3>
-<p>这次用了 Terminal 主题，风格极简，没有多余的装饰。黑底白字，等宽字体，就像在终端里阅读一样。对于以文字为主的个人博客来说，这种设计恰到好处——让读者专注于内容本身。</p>
-<h3 id="接下来的计划">接下来的计划</h3>
+            <h2 id="起因">起因</h2>
+<p>手头有个小项目需要精确控制电机转动角度，于是买了一块 TB6600 步进电机驱动器和一颗 42 步进电机。控制器用的是树莓派 4B，通过 GPIO 直接发脉冲。本以为照着淘宝店家的接线图接上就能转，结果折腾了整整一个下午。</p>
+<h2 id="tb6600-简介">TB6600 简介</h2>
+<p>TB6600 是东芝出品的一款两相步进电机驱动芯片，市面上常见的模块把芯片、光耦隔离、拨码开关都集成在了一块板子上。主要特点：</p>
 <ul>
-<li>把之前的笔记整理一下搬过来</li>
-<li>写几篇关于日常开发踩坑的记录</li>
-<li>也许可以分享一下 Windows 上的一些效率工具</li>
+<li>供电电压 9~42V DC</li>
+<li>最大 4A 电流输出</li>
+<li>支持 1/2/4/8/16 细分</li>
+<li>共阳 / 共阴接法都支持</li>
 </ul>
-<p>总之，又一个开始。希望这次能坚持下去。</p>
+<p>六个拨码开关：S1<del>S3 设电流，S4</del>S6 设细分。控制端有 ENA+/-（使能）、DIR+/-（方向）、PUL+/-（脉冲）三组信号。</p>
+<h2 id="接线">接线</h2>
+<p>树莓派 40pin GPIO 是 3.3V 电平，TB6600 的控制信号输入端内部有光耦，推荐用共阳极接法：</p>
+<pre tabindex="0"><code>树莓派 5V  (Pin 2/4)   →  ENA+ / DIR+ / PUL+
+树莓派 GPIO23 (Pin 16) →  PUL-  (脉冲)
+树莓派 GPIO24 (Pin 18) →  DIR-  (方向)
+树莓派 GPIO25 (Pin 22) →  ENA-  (使能)
+</code></pre><p>关键点：<strong>TB6600 的控制信号触发的是下降沿</strong>。光耦的阳极接 5V，阴极（PUL-）被 GPIO 拉低时导通，产生一个有效脉冲。所以 GPIO 默认保持高电平，拉低再拉高才算一个脉冲。</p>
           
         </div>
 
         
-           <div>
-            <a class="read-more button inline" href="/posts/hello-hugo/">[]</a>
-          </div>
-        
-      </article>
-    
-      <article class="post on-list">
-        <h2 class="post-title">
-          <a href="http://localhost:1313/posts/myfirstblog/">MyFirstBlog</a>
-        </h2>
-        <div class="post-meta"><time class="post-date">2026-07-13</time></div>
-
-        
-
-        
-
-
-        <div class="post-content">
-          
-            <h1 id="这是一个测试页面">这是一个测试页面</h1>
-          
-        </div>
-
-        
-           <div>
-            <a class="read-more button inline" href="/posts/myfirstblog/">[]</a>
+          <div>
+            <a class="read-more button inline" href="/posts/raspberry-pi-tb6600/">[]</a>
           </div>
         
       </article>

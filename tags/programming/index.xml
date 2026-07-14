@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Programming on ZHYX&#39;s Blog</title>
+		<link>http://localhost:1313/tags/programming/</link>
+		<description>Recent content in Programming on ZHYX&#39;s Blog</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<lastBuildDate>Tue, 14 Jul 2026 10:30:00 +0800</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Learning Rust</title>
+				<link>http://localhost:1313/posts/learning-rust/</link>
+				<pubDate>Tue, 14 Jul 2026 10:30:00 +0800</pubDate>
+				<guid>http://localhost:1313/posts/learning-rust/</guid>
+				<description>&lt;h2 id=&#34;入坑-rust-的第一周&#34;&gt;入坑 Rust 的第一周&lt;/h2&gt;&#xA;&lt;p&gt;花了差不多一周的时间过了一遍 Rust 的基础语法。说实话，刚开始的体验有点痛苦——编译器像一个严格的老师，每一行代码都要审查得明明白白。&lt;/p&gt;&#xA;&lt;h3 id=&#34;所有权机制&#34;&gt;所有权机制&lt;/h3&gt;&#xA;&lt;p&gt;Rust 最核心的概念就是所有权（ownership）。没有垃圾回收，没有手动 &lt;code&gt;malloc/free&lt;/code&gt;，而是通过一套编译期的借用检查规则来保证内存安全。&lt;/p&gt;&#xA;&lt;p&gt;一开始很不习惯：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; s1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; String::from(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;hello&amp;#34;&lt;/span&gt;);&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; s2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; s1;             &lt;span style=&#34;color:#75715e&#34;&gt;// s1 已经失效了&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;println!&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, s1);      &lt;span style=&#34;color:#75715e&#34;&gt;// 编译错误！&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;每次把变量传给函数、放进循环，都得多想一步&amp;quot;这个值现在归谁&amp;quot;。但几天下来，这种思维方式反而让人对内存管理有了更清晰的认识。&lt;/p&gt;&#xA;&lt;h3 id=&#34;第一印象&#34;&gt;第一印象&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;编译器信息极其友好&lt;/strong&gt;：报错信息通常会给出修改建议，甚至有示例代码&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Cargo 很好用&lt;/strong&gt;：内置的包管理和构建工具，体验比 C++ 的 CMake 舒服太多&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;文档质量高&lt;/strong&gt;：官方的那本 &lt;em&gt;The Book&lt;/em&gt; 写得通俗易懂&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;虽然离真正用 Rust 做项目还有一段距离，但至少已经不再是&amp;quot;Hello World 程序员&amp;quot;了。下一阶段打算用 Rust 写个小工具练练手。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

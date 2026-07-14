@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Stepper-Motor on ZHYX&#39;s Blog</title>
+		<link>http://localhost:1313/tags/stepper-motor/</link>
+		<description>Recent content in Stepper-Motor on ZHYX&#39;s Blog</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<lastBuildDate>Tue, 14 Jul 2026 10:00:00 +0800</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/tags/stepper-motor/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>树莓派 GPIO 调试 TB6600 步进电机驱动器</title>
+				<link>http://localhost:1313/posts/raspberry-pi-tb6600/</link>
+				<pubDate>Tue, 14 Jul 2026 10:00:00 +0800</pubDate>
+				<guid>http://localhost:1313/posts/raspberry-pi-tb6600/</guid>
+				<description>&lt;h2 id=&#34;起因&#34;&gt;起因&lt;/h2&gt;&#xA;&lt;p&gt;手头有个小项目需要精确控制电机转动角度，于是买了一块 TB6600 步进电机驱动器和一颗 42 步进电机。控制器用的是树莓派 4B，通过 GPIO 直接发脉冲。本以为照着淘宝店家的接线图接上就能转，结果折腾了整整一个下午。&lt;/p&gt;&#xA;&lt;h2 id=&#34;tb6600-简介&#34;&gt;TB6600 简介&lt;/h2&gt;&#xA;&lt;p&gt;TB6600 是东芝出品的一款两相步进电机驱动芯片，市面上常见的模块把芯片、光耦隔离、拨码开关都集成在了一块板子上。主要特点：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;供电电压 9~42V DC&lt;/li&gt;&#xA;&lt;li&gt;最大 4A 电流输出&lt;/li&gt;&#xA;&lt;li&gt;支持 1/2/4/8/16 细分&lt;/li&gt;&#xA;&lt;li&gt;共阳 / 共阴接法都支持&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;六个拨码开关：S1&lt;del&gt;S3 设电流，S4&lt;/del&gt;S6 设细分。控制端有 ENA+/-（使能）、DIR+/-（方向）、PUL+/-（脉冲）三组信号。&lt;/p&gt;&#xA;&lt;h2 id=&#34;接线&#34;&gt;接线&lt;/h2&gt;&#xA;&lt;p&gt;树莓派 40pin GPIO 是 3.3V 电平，TB6600 的控制信号输入端内部有光耦，推荐用共阳极接法：&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;树莓派 5V  (Pin 2/4)   →  ENA+ / DIR+ / PUL+&#xA;树莓派 GPIO23 (Pin 16) →  PUL-  (脉冲)&#xA;树莓派 GPIO24 (Pin 18) →  DIR-  (方向)&#xA;树莓派 GPIO25 (Pin 22) →  ENA-  (使能)&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;关键点：&lt;strong&gt;TB6600 的控制信号触发的是下降沿&lt;/strong&gt;。光耦的阳极接 5V，阴极（PUL-）被 GPIO 拉低时导通，产生一个有效脉冲。所以 GPIO 默认保持高电平，拉低再拉高才算一个脉冲。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

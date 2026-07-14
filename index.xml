@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Mon, 13 Jul 2026 22:58:37 +0800</lastBuildDate>
+			<lastBuildDate>Tue, 14 Jul 2026 10:00:00 +0800</lastBuildDate>
 		
 			<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>树莓派 GPIO 调试 TB6600 步进电机驱动器</title>
+				<link>http://localhost:1313/posts/raspberry-pi-tb6600/</link>
+				<pubDate>Tue, 14 Jul 2026 10:00:00 +0800</pubDate>
+				<guid>http://localhost:1313/posts/raspberry-pi-tb6600/</guid>
+				<description>&lt;h2 id=&#34;起因&#34;&gt;起因&lt;/h2&gt;&#xA;&lt;p&gt;大创项目需要精确控制电机转动角度，于是买了一块 TB6600 步进电机驱动器和一颗 42 步进电机。控制器用的是树莓派 4B，通过 GPIO 直接发脉冲。本以为照着淘宝店家的接线图接上就能转，结果折腾了整整一个下午。&lt;/p&gt;&#xA;&lt;h2 id=&#34;tb6600-简介&#34;&gt;TB6600 简介&lt;/h2&gt;&#xA;&lt;p&gt;TB6600 是一款两相步进电机驱动芯片，市面上常见的模块把芯片、光耦隔离、拨码开关都集成在了一块板子上。&lt;/p&gt;&#xA;&lt;h2 id=&#34;踩到的坑&#34;&gt;踩到的坑&lt;/h2&gt;&#xA;&lt;h3 id=&#34;坑1电机不转只有高频啸叫&#34;&gt;坑1：电机不转，只有高频啸叫&lt;/h3&gt;&#xA;&lt;p&gt;脉冲频率太高了。TB6600 最大响应频率约 200kHz，但 42 步进电机在无负载情况下启动频率不能太高。我把 &lt;code&gt;time.sleep&lt;/code&gt; 从 0.0001 改到 0.001，电机才正常转起来。&lt;/p&gt;&#xA;&lt;h3 id=&#34;坑2方向偶尔反转&#34;&gt;坑2：方向偶尔反转&lt;/h3&gt;&#xA;&lt;p&gt;排查了半天，最后发现是杜邦线接触不良。DIR 信号不稳定时，驱动器的方向会出错。焊了根线解决。&lt;/p&gt;&#xA;&lt;h3 id=&#34;坑3使能信号逻辑反了&#34;&gt;坑3：使能信号逻辑反了&lt;/h3&gt;&#xA;&lt;p&gt;一开始以为 ENA- 给高电平是使能，结果电机完全不动。查了 TB6600 手册才发现——ENA- 悬空或高电平时驱动器&lt;strong&gt;脱机&lt;/strong&gt;（电机自由转动），拉低才是使能。跟直觉正好相反。&lt;/p&gt;&#xA;&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;&#xA;&lt;p&gt;整个调试过程下来，最大的感受是：&lt;strong&gt;看手册&lt;/strong&gt;。很多时候觉得是代码的问题，查到最后往往是硬件层面的原因——接线、供电、信号。&lt;/p&gt;&#xA;&lt;p&gt;这次折腾完，对步进电机的控制链路算是有了比较完整的理解。下一步打算用 Python 封装一个简单的控制库。&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>MyFirstBlog</title>
 				<link>http://localhost:1313/posts/myfirstblog/</link>

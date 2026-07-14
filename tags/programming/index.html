@@ -2,7 +2,7 @@
 <html lang="en">
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   
-    <title>Posts :: ZHYX&#39;s Blog</title>
+    <title>Programming :: ZHYX&#39;s Blog</title>
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
 
   <meta name="robots" content="noodp" />
 
-<link rel="canonical" href="http://localhost:1313/posts/" />
+<link rel="canonical" href="http://localhost:1313/tags/programming/" />
 
 
 
@@ -72,9 +72,9 @@
 
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Posts">
+<meta property="og:title" content="Programming">
 <meta property="og:description" content="" />
-<meta property="og:url" content="http://localhost:1313/posts/" />
+<meta property="og:url" content="http://localhost:1313/tags/programming/" />
 <meta property="og:site_name" content="ZHYX&#39;s Blog" />
 
   <meta property="og:image" content="http://localhost:1313/og-image.png">
@@ -86,7 +86,7 @@
 
 
 
-  <link href="/posts/index.xml" rel="alternate" type="application/rss+xml" title="ZHYX&#39;s Blog" />
+  <link href="/tags/programming/index.xml" rel="alternate" type="application/rss+xml" title="ZHYX&#39;s Blog" />
 
 
 
@@ -121,21 +121,22 @@
 
   <div class="content">
     
+  <h1>Posts for: #Programming</h1>
   
   <div class="posts">
     
       <article class="post on-list">
-        <h2 class="post-title">
-          <a href="http://localhost:1313/posts/hello-hugo/">Hello Hugo</a>
-        </h2>
+        <h1 class="post-title">
+          <a href="http://localhost:1313/posts/learning-rust/">Learning Rust</a>
+        </h1>
         <div class="post-meta"><time class="post-date">2026-07-14</time></div>
 
         
           <span class="post-tags">
             
-            #<a href="http://localhost:1313/tags/hugo/">hugo</a>&nbsp;
+            #<a href="http://localhost:1313/tags/rust/">rust</a>&nbsp;
             
-            #<a href="http://localhost:1313/tags/blog/">blog</a>&nbsp;
+            #<a href="http://localhost:1313/tags/programming/">programming</a>&nbsp;
             
           </span>
         
@@ -145,48 +146,28 @@
 
         <div class="post-content">
           
-            <h2 id="重新开始写博客">重新开始写博客</h2>
-<p>今天花了一些时间把 Hugo 站点重新搭起来了。选择 Hugo 的原因很简单——快，真的很快。</p>
-<p>一个静态站点生成器，用 Go 写成，编译一个中等规模的站点只需要几百毫秒。对比以前用过的某些工具动辄几十秒的构建时间，Hugo 的体验确实让人愉悦。</p>
-<h3 id="为什么选-terminal-主题">为什么选 Terminal 主题</h3>
-<p>这次用了 Terminal 主题，风格极简，没有多余的装饰。黑底白字，等宽字体，就像在终端里阅读一样。对于以文字为主的个人博客来说，这种设计恰到好处——让读者专注于内容本身。</p>
-<h3 id="接下来的计划">接下来的计划</h3>
+            <h2 id="入坑-rust-的第一周">入坑 Rust 的第一周</h2>
+<p>花了差不多一周的时间过了一遍 Rust 的基础语法。说实话，刚开始的体验有点痛苦——编译器像一个严格的老师，每一行代码都要审查得明明白白。</p>
+<h3 id="所有权机制">所有权机制</h3>
+<p>Rust 最核心的概念就是所有权（ownership）。没有垃圾回收，没有手动 <code>malloc/free</code>，而是通过一套编译期的借用检查规则来保证内存安全。</p>
+<p>一开始很不习惯：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;hello&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> s1;             <span style="color:#75715e">// s1 已经失效了
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, s1);      <span style="color:#75715e">// 编译错误！
+</span></span></span></code></pre></div><p>每次把变量传给函数、放进循环，都得多想一步&quot;这个值现在归谁&quot;。但几天下来，这种思维方式反而让人对内存管理有了更清晰的认识。</p>
+<h3 id="第一印象">第一印象</h3>
 <ul>
-<li>把之前的笔记整理一下搬过来</li>
-<li>写几篇关于日常开发踩坑的记录</li>
-<li>也许可以分享一下 Windows 上的一些效率工具</li>
+<li><strong>编译器信息极其友好</strong>：报错信息通常会给出修改建议，甚至有示例代码</li>
+<li><strong>Cargo 很好用</strong>：内置的包管理和构建工具，体验比 C++ 的 CMake 舒服太多</li>
+<li><strong>文档质量高</strong>：官方的那本 <em>The Book</em> 写得通俗易懂</li>
 </ul>
-<p>总之，又一个开始。希望这次能坚持下去。</p>
+<p>虽然离真正用 Rust 做项目还有一段距离，但至少已经不再是&quot;Hello World 程序员&quot;了。下一阶段打算用 Rust 写个小工具练练手。</p>
           
         </div>
 
         
-           <div>
-            <a class="read-more button inline" href="/posts/hello-hugo/">[]</a>
-          </div>
-        
-      </article>
-    
-      <article class="post on-list">
-        <h2 class="post-title">
-          <a href="http://localhost:1313/posts/myfirstblog/">MyFirstBlog</a>
-        </h2>
-        <div class="post-meta"><time class="post-date">2026-07-13</time></div>
-
-        
-
-        
-
-
-        <div class="post-content">
-          
-            <h1 id="这是一个测试页面">这是一个测试页面</h1>
-          
-        </div>
-
-        
-           <div>
-            <a class="read-more button inline" href="/posts/myfirstblog/">[]</a>
+          <div>
+            <a class="read-more button inline" href="/posts/learning-rust/">[]</a>
           </div>
         
       </article>
